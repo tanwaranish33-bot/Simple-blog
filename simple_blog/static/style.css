@@ -1,0 +1,438 @@
+
+/*
+  style.css — Simple Blog Stylesheet
+  Project  : Inkwell Blog Platform
+  Author   : [Your Name]
+  Date     : April 25, 2026
+  Aesthetic: Dark editorial — deep navy background, crisp white type,
+             amber accent, strong serif headlines. Feels like a premium
+             online publication.
+*/
+
+/* ====================================================
+   1. CSS CUSTOM PROPERTIES
+   ==================================================== */
+:root {
+  /* Colors */
+  --clr-bg:           #0d1117;
+  --clr-surface:      #161b22;
+  --clr-surface-2:    #1f2937;
+  --clr-border:       #2d3748;
+  --clr-border-light: #374151;
+  --clr-accent:       #f59e0b;       /* amber */
+  --clr-accent-soft:  rgba(245, 158, 11, 0.12);
+  --clr-danger:       #ef4444;
+  --clr-danger-soft:  rgba(239, 68, 68, 0.12);
+  --clr-success:      #10b981;
+  --clr-text-primary:   #f1f5f9;
+  --clr-text-secondary: #94a3b8;
+  --clr-text-muted:     #475569;
+
+  /* Typography */
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body:    'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+  --font-mono:    'Courier New', Courier, monospace;
+
+  /* Layout */
+  --max-width: 860px;
+  --header-h:  64px;
+
+  /* Spacing */
+  --sp-xs: 0.4rem;
+  --sp-sm: 0.8rem;
+  --sp-md: 1.2rem;
+  --sp-lg: 2rem;
+  --sp-xl: 3.2rem;
+
+  /* Shape */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 18px;
+
+  /* Shadow */
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-focus: 0 0 0 3px rgba(245, 158, 11, 0.35);
+
+  /* Transitions */
+  --t: 0.2s ease;
+}
+
+/* ====================================================
+   2. RESET & BASE
+   ==================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--clr-bg);
+  color: var(--clr-text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
+/* ====================================================
+   3. SITE HEADER & NAV  (Task 7 Bonus)
+   ==================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--clr-border);
+  height: var(--header-h);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-lg);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.brand-mark    { color: var(--clr-accent); font-size: 1rem; }
+.brand-accent  { color: var(--clr-accent); }
+
+/* Nav links */
+.site-nav { display: flex; align-items: center; gap: var(--sp-md); }
+
+.nav-link {
+  font-size: 0.875rem;
+  color: var(--clr-text-secondary);
+  transition: color var(--t);
+}
+.nav-link:hover { color: var(--clr-text-primary); }
+
+.nav-link--cta {
+  background: var(--clr-accent);
+  color: #000;
+  padding: 0.4rem 1rem;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: opacity var(--t), transform var(--t);
+}
+.nav-link--cta:hover { opacity: 0.88; color: #000; transform: translateY(-1px); }
+
+/* ====================================================
+   4. MAIN CONTENT AREA
+   ==================================================== */
+.site-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--sp-xl) var(--sp-lg);
+}
+
+/* ====================================================
+   5. PAGE HEADER (above post grid / form)
+   ==================================================== */
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-xl);
+  padding-bottom: var(--sp-lg);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.page-subtitle {
+  margin-top: var(--sp-xs);
+  color: var(--clr-text-muted);
+  font-size: 0.875rem;
+}
+
+/* ====================================================
+   6. POST GRID
+   ==================================================== */
+.post-grid {
+  display: grid;
+  gap: var(--sp-md);
+}
+
+/* ====================================================
+   7. POST CARD
+   ==================================================== */
+.post-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-lg);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--t), transform var(--t);
+}
+.post-card:hover {
+  border-color: var(--clr-border-light);
+  transform: translateY(-2px);
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-sm);
+}
+.post-date { font-size: 0.75rem; color: var(--clr-text-muted); }
+.post-id   { font-size: 0.7rem;  color: var(--clr-text-muted); font-family: var(--font-mono); }
+
+.post-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: var(--sp-sm);
+  color: var(--clr-text-primary);
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.65;
+  margin-bottom: var(--sp-lg);
+}
+
+/* Post action buttons */
+.post-actions {
+  display: flex;
+  gap: var(--sp-sm);
+  align-items: center;
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--clr-border);
+}
+
+.delete-form { display: inline; margin: 0; }
+
+/* ====================================================
+   8. BUTTONS
+   ==================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: opacity var(--t), transform var(--t), background var(--t), color var(--t);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:focus-visible { outline: 2px solid var(--clr-accent); outline-offset: 3px; }
+.btn:active        { transform: scale(0.96); }
+
+/* Primary — amber fill */
+.btn-primary {
+  background: var(--clr-accent);
+  color: #000;
+}
+.btn-primary:hover { opacity: 0.88; color: #000; }
+
+/* Secondary — outlined */
+.btn-secondary {
+  background: transparent;
+  color: var(--clr-text-secondary);
+  border: 1px solid var(--clr-border-light);
+}
+.btn-secondary:hover {
+  color: var(--clr-accent);
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-soft);
+}
+
+/* Danger — delete */
+.btn-danger {
+  background: transparent;
+  color: var(--clr-text-muted);
+  border: 1px solid var(--clr-border);
+}
+.btn-danger:hover {
+  color: var(--clr-danger);
+  border-color: var(--clr-danger);
+  background: var(--clr-danger-soft);
+}
+
+/* Ghost — cancel */
+.btn-ghost {
+  background: transparent;
+  color: var(--clr-text-muted);
+  border: 1px solid var(--clr-border);
+}
+.btn-ghost:hover { color: var(--clr-text-primary); border-color: var(--clr-border-light); }
+
+/* ====================================================
+   9. EMPTY STATE
+   ==================================================== */
+.empty-state {
+  text-align: center;
+  padding: var(--sp-xl) var(--sp-lg);
+  color: var(--clr-text-muted);
+}
+.empty-icon { font-size: 3rem; display: block; margin-bottom: var(--sp-md); }
+.empty-state h2 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: var(--sp-sm); color: var(--clr-text-secondary); }
+.empty-state p  { margin-bottom: var(--sp-lg); font-size: 0.9rem; }
+
+/* ====================================================
+  10. FORM PAGE
+   ==================================================== */
+.form-page {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.form-page-header {
+  margin-bottom: var(--sp-xl);
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+  margin-bottom: var(--sp-md);
+  transition: color var(--t);
+}
+.back-link:hover { color: var(--clr-accent); }
+
+/* ====================================================
+  11. FORM ELEMENTS
+   ==================================================== */
+.blog-form {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-xl) var(--sp-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  margin-bottom: var(--sp-lg);
+}
+
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text-secondary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.required { color: var(--clr-accent); }
+
+.form-input,
+.form-textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--clr-text-primary);
+  background: var(--clr-surface-2);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--r-sm);
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color var(--t), box-shadow var(--t);
+  width: 100%;
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--clr-text-muted); }
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-focus);
+}
+
+.form-textarea { resize: vertical; min-height: 200px; line-height: 1.65; }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-sm);
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--clr-border);
+}
+
+.edit-meta {
+  font-size: 0.78rem;
+  color: var(--clr-text-muted);
+  margin-bottom: var(--sp-md);
+  font-family: var(--font-mono);
+}
+
+/* ====================================================
+  12. ALERTS
+   ==================================================== */
+.alert {
+  padding: 0.8rem 1rem;
+  border-radius: var(--r-sm);
+  font-size: 0.875rem;
+  margin-bottom: var(--sp-lg);
+  border-left: 3px solid;
+}
+.alert--error {
+  background: var(--clr-danger-soft);
+  color: #fca5a5;
+  border-color: var(--clr-danger);
+}
+
+/* Flash messages */
+.flash-wrapper { max-width: var(--max-width); margin: var(--sp-md) auto 0; padding: 0 var(--sp-lg); }
+.flash { padding: 0.75rem 1rem; border-radius: var(--r-sm); font-size: 0.875rem; }
+.flash--success { background: rgba(16, 185, 129, 0.12); color: #6ee7b7; border-left: 3px solid var(--clr-success); }
+.flash--error   { background: var(--clr-danger-soft); color: #fca5a5; border-left: 3px solid var(--clr-danger); }
+
+/* ====================================================
+  13. SITE FOOTER
+   ==================================================== */
+.site-footer {
+  text-align: center;
+  padding: var(--sp-xl) var(--sp-lg) var(--sp-lg);
+  color: var(--clr-text-muted);
+  font-size: 0.78rem;
+  border-top: 1px solid var(--clr-border);
+  margin-top: var(--sp-xl);
+}
+
+/* ====================================================
+  14. RESPONSIVE
+   ==================================================== */
+@media (max-width: 600px) {
+  .site-main    { padding: var(--sp-lg) var(--sp-md); }
+  .header-inner { padding: 0 var(--sp-md); }
+
+  .page-header  { flex-direction: column; align-items: flex-start; }
+
+  .blog-form    { padding: var(--sp-lg) var(--sp-md); }
+  .form-actions { flex-direction: column-reverse; }
+  .form-actions .btn { width: 100%; justify-content: center; }
+
+  .post-actions { flex-wrap: wrap; }
+}

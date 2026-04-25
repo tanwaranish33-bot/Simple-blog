@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{# index.html — Home page: lists all blog posts (Task 4 — Read) #}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1 class="page-title">All Posts</h1>
+    <p class="page-subtitle">
+      {{ posts|length }} post{{ 's' if posts|length != 1 else '' }} published
+    </p>
+  </div>
+  <a href="{{ url_for('create') }}" class="btn btn-primary">+ New Post</a>
+</div>
+
+<!-- ── Post Grid ── -->
+{% if posts %}
+  <div class="post-grid">
+    {% for post in posts %}
+    <article class="post-card">
+
+      <!-- Post Meta -->
+      <div class="post-meta">
+        <span class="post-date">{{ post.date }}</span>
+        <span class="post-id">#{{ post.id }}</span>
+      </div>
+
+      <!-- Post Title -->
+      <h2 class="post-title">{{ post.title }}</h2>
+
+      <!-- Post Excerpt (first 160 chars) -->
+      <p class="post-excerpt">
+        {{ post.content[:160] }}{% if post.content|length > 160 %}…{% endif %}
+      </p>
+
+      <!-- Post Actions: Edit & Delete (Tasks 5 & 6) -->
+      <div class="post-actions">
+        <!-- Edit link -->
+        <a href="{{ url_for('edit', post_id=post.id) }}" class="btn btn-secondary">
+          ✎ Edit
+        </a>
+
+        <!-- Delete — uses a form with POST to avoid accidental deletion via GET -->
+        <form method="POST"
+              action="{{ url_for('delete', post_id=post.id) }}"
+              class="delete-form"
+              onsubmit="return confirm('Delete this post? This cannot be undone.');">
+          <button type="submit" class="btn btn-danger">✕ Delete</button>
+        </form>
+      </div>
+
+    </article>
+    {% endfor %}
+  </div>
+
+{% else %}
+  <!-- Empty state -->
+  <div class="empty-state">
+    <span class="empty-icon">📝</span>
+    <h2>No posts yet</h2>
+    <p>Create your first post to get started.</p>
+    <a href="{{ url_for('create') }}" class="btn btn-primary">Write your first post</a>
+  </div>
+{% endif %}
+{% endblock %}
